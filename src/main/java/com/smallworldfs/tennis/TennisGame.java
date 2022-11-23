@@ -42,8 +42,7 @@ public class TennisGame {
     }
 
     private boolean isRegularScore() {
-        return (score1 > 0 && score1 < 4 && score2 == 0) || (score2 > 0 && score2 < 4 && score1 == 0)
-                || (score1 > score2 && score1 < 4) || ((score2 > score1 && score2 < 4));
+        return (score1 < 4 && score2 < 4 && score1 != score2);
     }
 
     private void addP1Score() {
