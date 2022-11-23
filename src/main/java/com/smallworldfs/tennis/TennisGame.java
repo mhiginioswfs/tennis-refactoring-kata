@@ -24,13 +24,9 @@ public class TennisGame {
 
         }
         if (scoreBoard.getDifference() == 0) {
-            String score = Score.fromNumericScore(scoreBoard.getScore1()).getText();
-            score += "-All";
-            return score;
+            return scoreBoard.getScore1() + "-All";
         }
-        String player1Result = Score.fromNumericScore(scoreBoard.getScore1()).getText();
-        String player2Result = Score.fromNumericScore(scoreBoard.getScore2()).getText();
-        return player1Result + "-" + player2Result;
+        return scoreBoard.getScore1() + "-" + scoreBoard.getScore2();
     }
 
     private void addP1Score() {

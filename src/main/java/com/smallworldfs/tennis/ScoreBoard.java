@@ -5,12 +5,12 @@ public class ScoreBoard {
     private int score1;
     private int score2;
 
-    public int getScore1() {
-        return score1;
+    public String getScore1() {
+        return Score.fromNumericScore(score1).getText();
     }
 
-    public int getScore2() {
-        return score2;
+    public String getScore2() {
+        return Score.fromNumericScore(score2).getText();
     }
 
     public void incScore1() {
