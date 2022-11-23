@@ -11,53 +11,49 @@ public class TennisGame {
     public TennisGame(String player1Name, String player2Name) {}
 
     public String getScore() {
-        String player1Result = "";
-        String player2Result = "";
-        String score = "";
-        if (score1 == score2 && score1 < 4) {
-            score = Score.fromNumericScore(score1).getText();
+        if (score1 == score2 && score1 < 3) {
+            String score = Score.fromNumericScore(score1).getText();
             score += "-All";
+            return score;
         }
-        if (score1 == score2 && score1 >= 3)
-            score = "Deuce";
+        if (score1 == score2 && score1 >= 3) {
+            return "Deuce";
+        }
 
         if (score1 > 0 && score1 < 4 && score2 == 0) {
-            player1Result = Score.fromNumericScore(score1).getText();
-            player2Result = Score.fromNumericScore(score2).getText();
-            score = player1Result + "-" + player2Result;
+            String player1Result = Score.fromNumericScore(score1).getText();
+            String player2Result = Score.fromNumericScore(score2).getText();
+            return player1Result + "-" + player2Result;
         }
         if (score2 > 0 && score2 < 4 && score1 == 0) {
-            player1Result = Score.fromNumericScore(score1).getText();
-            player2Result = Score.fromNumericScore(score2).getText();
-            score = player1Result + "-" + player2Result;
+            String player1Result = Score.fromNumericScore(score1).getText();
+            String player2Result = Score.fromNumericScore(score2).getText();
+            return player1Result + "-" + player2Result;
         }
 
         if (score1 > score2 && score1 < 4) {
-            player1Result = Score.fromNumericScore(score1).getText();
-            player2Result = Score.fromNumericScore(score2).getText();
-            score = player1Result + "-" + player2Result;
+            String player1Result = Score.fromNumericScore(score1).getText();
+            String player2Result = Score.fromNumericScore(score2).getText();
+            return player1Result + "-" + player2Result;
         }
         if (score2 > score1 && score2 < 4) {
-            player1Result = Score.fromNumericScore(score1).getText();
-            player2Result = Score.fromNumericScore(score2).getText();
-            score = player1Result + "-" + player2Result;
+            String player1Result = Score.fromNumericScore(score1).getText();
+            String player2Result = Score.fromNumericScore(score2).getText();
+            return player1Result + "-" + player2Result;
         }
-
-        if (score1 > score2 && score2 >= 3) {
-            score = "Advantage player1";
-        }
-
-        if (score2 > score1 && score1 >= 3) {
-            score = "Advantage player2";
-        }
-
         if (score1 >= 4 && score2 >= 0 && (score1 - score2) >= 2) {
-            score = "Win for player1";
+            return "Win for player1";
         }
         if (score2 >= 4 && score1 >= 0 && (score2 - score1) >= 2) {
-            score = "Win for player2";
+            return "Win for player2";
         }
-        return score;
+        if (score1 > score2 && score2 >= 3) {
+            return "Advantage player1";
+        }
+        if (score2 > score1 && score1 >= 3) {
+            return "Advantage player2";
+        }
+        return null;
     }
 
     private void addP1Score() {

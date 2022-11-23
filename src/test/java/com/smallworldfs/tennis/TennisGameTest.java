@@ -16,6 +16,7 @@ class TennisGameTest {
                 Arguments.of(2, 2, "Thirty-All"),
                 Arguments.of(3, 3, "Deuce"),
                 Arguments.of(4, 4, "Deuce"),
+                Arguments.of(6, 6, "Deuce"),
 
                 Arguments.of(1, 0, "Fifteen-Love"),
                 Arguments.of(0, 1, "Love-Fifteen"),
