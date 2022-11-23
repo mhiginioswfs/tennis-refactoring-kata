@@ -12,26 +12,18 @@ public class TennisGame {
     }
 
     public String getScore() {
-        if (isEndGameStage()) {
-            if (scoreBoard.getScore1() == scoreBoard.getScore2()) {
+        if (scoreBoard.isEndGameStage()) {
+            int difference = scoreBoard.getDifference();
+            if (difference == 0) {
                 return "Deuce";
             }
-            if (scoreBoard.getScore1() >= 4 && scoreBoard.getScore2() >= 0
-                    && (scoreBoard.getScore1() - scoreBoard.getScore2()) >= 2) {
-                return "Win for player1";
+            if (difference == 1) {
+                return "Advantage " + scoreBoard.getWinner();
             }
-            if (scoreBoard.getScore2() >= 4 && scoreBoard.getScore1() >= 0
-                    && (scoreBoard.getScore2() - scoreBoard.getScore1()) >= 2) {
-                return "Win for player2";
-            }
-            if (scoreBoard.getScore1() > scoreBoard.getScore2() && scoreBoard.getScore2() >= 3) {
-                return "Advantage player1";
-            }
-            if (scoreBoard.getScore2() > scoreBoard.getScore1() && scoreBoard.getScore1() >= 3) {
-                return "Advantage player2";
-            }
+            return "Win for " + scoreBoard.getWinner();
+
         }
-        if (scoreBoard.getScore1() == scoreBoard.getScore2()) {
+        if (scoreBoard.getDifference() == 0) {
             String score = Score.fromNumericScore(scoreBoard.getScore1()).getText();
             score += "-All";
             return score;
@@ -39,11 +31,6 @@ public class TennisGame {
         String player1Result = Score.fromNumericScore(scoreBoard.getScore1()).getText();
         String player2Result = Score.fromNumericScore(scoreBoard.getScore2()).getText();
         return player1Result + "-" + player2Result;
-    }
-
-    private boolean isEndGameStage() {
-        return scoreBoard.getScore1() > 3 || scoreBoard.getScore2() > 3
-                || (scoreBoard.getScore1() == 3 && scoreBoard.getScore2() == 3);
     }
 
     private void addP1Score() {
