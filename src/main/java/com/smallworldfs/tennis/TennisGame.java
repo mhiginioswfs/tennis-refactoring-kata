@@ -1,5 +1,7 @@
 package com.smallworldfs.tennis;
 
+import static com.smallworldfs.tennis.ScoreBoardFormatter.formatterFor;
+
 public class TennisGame {
 
     private ScoreBoard scoreBoard;
@@ -12,21 +14,7 @@ public class TennisGame {
     }
 
     public String getScore() {
-        if (scoreBoard.isEndGameStage()) {
-            int difference = scoreBoard.getDifference();
-            if (difference == 0) {
-                return "Deuce";
-            }
-            if (difference == 1) {
-                return "Advantage " + scoreBoard.getWinner();
-            }
-            return "Win for " + scoreBoard.getWinner();
-
-        }
-        if (scoreBoard.getDifference() == 0) {
-            return scoreBoard.getScore1() + "-All";
-        }
-        return scoreBoard.getScore1() + "-" + scoreBoard.getScore2();
+        return formatterFor(scoreBoard).apply(scoreBoard);
     }
 
     private void addP1Score() {
