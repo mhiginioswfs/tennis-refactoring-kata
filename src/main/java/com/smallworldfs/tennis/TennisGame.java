@@ -2,52 +2,56 @@ package com.smallworldfs.tennis;
 
 public class TennisGame {
 
-    private int score1 = 0;
-    private int score2 = 0;
+    private ScoreBoard scoreBoard;
 
     /**
      * @deprecated Names are not used
      */
-    public TennisGame(String player1Name, String player2Name) {}
+    public TennisGame(String player1Name, String player2Name) {
+        scoreBoard = new ScoreBoard();
+    }
 
     public String getScore() {
         if (isEndGameStage()) {
-            if (score1 == score2) {
+            if (scoreBoard.getScore1() == scoreBoard.getScore2()) {
                 return "Deuce";
             }
-            if (score1 >= 4 && score2 >= 0 && (score1 - score2) >= 2) {
+            if (scoreBoard.getScore1() >= 4 && scoreBoard.getScore2() >= 0
+                    && (scoreBoard.getScore1() - scoreBoard.getScore2()) >= 2) {
                 return "Win for player1";
             }
-            if (score2 >= 4 && score1 >= 0 && (score2 - score1) >= 2) {
+            if (scoreBoard.getScore2() >= 4 && scoreBoard.getScore1() >= 0
+                    && (scoreBoard.getScore2() - scoreBoard.getScore1()) >= 2) {
                 return "Win for player2";
             }
-            if (score1 > score2 && score2 >= 3) {
+            if (scoreBoard.getScore1() > scoreBoard.getScore2() && scoreBoard.getScore2() >= 3) {
                 return "Advantage player1";
             }
-            if (score2 > score1 && score1 >= 3) {
+            if (scoreBoard.getScore2() > scoreBoard.getScore1() && scoreBoard.getScore1() >= 3) {
                 return "Advantage player2";
             }
         }
-        if (score1 == score2) {
-            String score = Score.fromNumericScore(score1).getText();
+        if (scoreBoard.getScore1() == scoreBoard.getScore2()) {
+            String score = Score.fromNumericScore(scoreBoard.getScore1()).getText();
             score += "-All";
             return score;
         }
-        String player1Result = Score.fromNumericScore(score1).getText();
-        String player2Result = Score.fromNumericScore(score2).getText();
+        String player1Result = Score.fromNumericScore(scoreBoard.getScore1()).getText();
+        String player2Result = Score.fromNumericScore(scoreBoard.getScore2()).getText();
         return player1Result + "-" + player2Result;
     }
 
     private boolean isEndGameStage() {
-        return score1 > 3 || score2 > 3 || (score1 == 3 && score2 == 3);
+        return scoreBoard.getScore1() > 3 || scoreBoard.getScore2() > 3
+                || (scoreBoard.getScore1() == 3 && scoreBoard.getScore2() == 3);
     }
 
     private void addP1Score() {
-        score1++;
+        scoreBoard.incScore1();
     }
 
     private void addP2Score() {
-        score2++;
+        scoreBoard.incScore2();
     }
 
     public void wonPoint(String player) {
