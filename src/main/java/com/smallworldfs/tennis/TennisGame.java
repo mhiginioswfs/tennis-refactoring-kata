@@ -20,27 +20,12 @@ public class TennisGame {
             return "Deuce";
         }
 
-        if (score1 > 0 && score1 < 4 && score2 == 0) {
-            String player1Result = Score.fromNumericScore(score1).getText();
-            String player2Result = Score.fromNumericScore(score2).getText();
-            return player1Result + "-" + player2Result;
-        }
-        if (score2 > 0 && score2 < 4 && score1 == 0) {
+        if (isRegularScore()) {
             String player1Result = Score.fromNumericScore(score1).getText();
             String player2Result = Score.fromNumericScore(score2).getText();
             return player1Result + "-" + player2Result;
         }
 
-        if (score1 > score2 && score1 < 4) {
-            String player1Result = Score.fromNumericScore(score1).getText();
-            String player2Result = Score.fromNumericScore(score2).getText();
-            return player1Result + "-" + player2Result;
-        }
-        if (score2 > score1 && score2 < 4) {
-            String player1Result = Score.fromNumericScore(score1).getText();
-            String player2Result = Score.fromNumericScore(score2).getText();
-            return player1Result + "-" + player2Result;
-        }
         if (score1 >= 4 && score2 >= 0 && (score1 - score2) >= 2) {
             return "Win for player1";
         }
@@ -54,6 +39,11 @@ public class TennisGame {
             return "Advantage player2";
         }
         return null;
+    }
+
+    private boolean isRegularScore() {
+        return (score1 > 0 && score1 < 4 && score2 == 0) || (score2 > 0 && score2 < 4 && score1 == 0)
+                || (score1 > score2 && score1 < 4) || ((score2 > score1 && score2 < 4));
     }
 
     private void addP1Score() {
