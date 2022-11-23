@@ -11,65 +11,36 @@ public class TennisGame {
     public TennisGame(String player1Name, String player2Name) {}
 
     public String getScore() {
-        String P1res = "";
-        String P2res = "";
+        String player1Result = "";
+        String player2Result = "";
         String score = "";
         if (score1 == score2 && score1 < 4) {
-            if (score1 == 0)
-                score = "Love";
-            if (score1 == 1)
-                score = "Fifteen";
-            if (score1 == 2)
-                score = "Thirty";
+            score = Score.fromNumericScore(score1).getText();
             score += "-All";
         }
         if (score1 == score2 && score1 >= 3)
             score = "Deuce";
 
-        if (score1 > 0 && score2 == 0) {
-            if (score1 == 1)
-                P1res = "Fifteen";
-            if (score1 == 2)
-                P1res = "Thirty";
-            if (score1 == 3)
-                P1res = "Forty";
-
-            P2res = "Love";
-            score = P1res + "-" + P2res;
+        if (score1 > 0 && score1 < 4 && score2 == 0) {
+            player1Result = Score.fromNumericScore(score1).getText();
+            player2Result = Score.fromNumericScore(score2).getText();
+            score = player1Result + "-" + player2Result;
         }
-        if (score2 > 0 && score1 == 0) {
-            if (score2 == 1)
-                P2res = "Fifteen";
-            if (score2 == 2)
-                P2res = "Thirty";
-            if (score2 == 3)
-                P2res = "Forty";
-
-            P1res = "Love";
-            score = P1res + "-" + P2res;
+        if (score2 > 0 && score2 < 4 && score1 == 0) {
+            player1Result = Score.fromNumericScore(score1).getText();
+            player2Result = Score.fromNumericScore(score2).getText();
+            score = player1Result + "-" + player2Result;
         }
 
         if (score1 > score2 && score1 < 4) {
-            if (score1 == 2)
-                P1res = "Thirty";
-            if (score1 == 3)
-                P1res = "Forty";
-            if (score2 == 1)
-                P2res = "Fifteen";
-            if (score2 == 2)
-                P2res = "Thirty";
-            score = P1res + "-" + P2res;
+            player1Result = Score.fromNumericScore(score1).getText();
+            player2Result = Score.fromNumericScore(score2).getText();
+            score = player1Result + "-" + player2Result;
         }
         if (score2 > score1 && score2 < 4) {
-            if (score2 == 2)
-                P2res = "Thirty";
-            if (score2 == 3)
-                P2res = "Forty";
-            if (score1 == 1)
-                P1res = "Fifteen";
-            if (score1 == 2)
-                P1res = "Thirty";
-            score = P1res + "-" + P2res;
+            player1Result = Score.fromNumericScore(score1).getText();
+            player2Result = Score.fromNumericScore(score2).getText();
+            score = player1Result + "-" + player2Result;
         }
 
         if (score1 > score2 && score2 >= 3) {
