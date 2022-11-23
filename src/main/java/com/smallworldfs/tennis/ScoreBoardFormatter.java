@@ -22,12 +22,20 @@ public enum ScoreBoardFormatter {
 
     public static ScoreBoardFormatter formatterFor(ScoreBoard scoreBoard) {
         if (scoreBoard.isEndGameStage()) {
-            return switch (scoreBoard.getDifference()) {
-                case 0 -> DEUCE;
-                case 1 -> ADVANTAGE;
-                default -> WINNER;
-            };
+            return endGameFormatter(scoreBoard);
         }
+        return regularFormatter(scoreBoard);
+    }
+
+    private static ScoreBoardFormatter regularFormatter(ScoreBoard scoreBoard) {
         return scoreBoard.getDifference() == 0 ? REGULAR_TIE : REGULAR;
+    }
+
+    private static ScoreBoardFormatter endGameFormatter(ScoreBoard scoreBoard) {
+        return switch (scoreBoard.getDifference()) {
+            case 0 -> DEUCE;
+            case 1 -> ADVANTAGE;
+            default -> WINNER;
+        };
     }
 }
