@@ -11,38 +11,35 @@ public class TennisGame {
     public TennisGame(String player1Name, String player2Name) {}
 
     public String getScore() {
-        if (score1 == score2 && score1 < 3) {
+        if (isEndGameStage()) {
+            if (score1 == score2) {
+                return "Deuce";
+            }
+            if (score1 >= 4 && score2 >= 0 && (score1 - score2) >= 2) {
+                return "Win for player1";
+            }
+            if (score2 >= 4 && score1 >= 0 && (score2 - score1) >= 2) {
+                return "Win for player2";
+            }
+            if (score1 > score2 && score2 >= 3) {
+                return "Advantage player1";
+            }
+            if (score2 > score1 && score1 >= 3) {
+                return "Advantage player2";
+            }
+        }
+        if (score1 == score2) {
             String score = Score.fromNumericScore(score1).getText();
             score += "-All";
             return score;
         }
-        if (score1 == score2 && score1 >= 3) {
-            return "Deuce";
-        }
-
-        if (isRegularScore()) {
-            String player1Result = Score.fromNumericScore(score1).getText();
-            String player2Result = Score.fromNumericScore(score2).getText();
-            return player1Result + "-" + player2Result;
-        }
-
-        if (score1 >= 4 && score2 >= 0 && (score1 - score2) >= 2) {
-            return "Win for player1";
-        }
-        if (score2 >= 4 && score1 >= 0 && (score2 - score1) >= 2) {
-            return "Win for player2";
-        }
-        if (score1 > score2 && score2 >= 3) {
-            return "Advantage player1";
-        }
-        if (score2 > score1 && score1 >= 3) {
-            return "Advantage player2";
-        }
-        return null;
+        String player1Result = Score.fromNumericScore(score1).getText();
+        String player2Result = Score.fromNumericScore(score2).getText();
+        return player1Result + "-" + player2Result;
     }
 
-    private boolean isRegularScore() {
-        return (score1 < 4 && score2 < 4 && score1 != score2);
+    private boolean isEndGameStage() {
+        return score1 > 3 || score2 > 3 || (score1 == 3 && score2 == 3);
     }
 
     private void addP1Score() {
