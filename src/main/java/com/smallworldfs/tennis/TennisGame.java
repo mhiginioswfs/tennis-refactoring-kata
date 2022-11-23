@@ -4,7 +4,7 @@ import static com.smallworldfs.tennis.ScoreBoardFormatter.formatterFor;
 
 public class TennisGame {
 
-    private ScoreBoard scoreBoard;
+    private final ScoreBoard scoreBoard;
 
     /**
      * @deprecated Names are not used
@@ -17,19 +17,11 @@ public class TennisGame {
         return formatterFor(scoreBoard).apply(scoreBoard);
     }
 
-    private void addP1Score() {
-        scoreBoard.incScore1();
-    }
-
-    private void addP2Score() {
-        scoreBoard.incScore2();
-    }
-
     public void wonPoint(String player) {
         if ("player1".equals(player)) {
-            addP1Score();
+            scoreBoard.incScore1();
         } else {
-            addP2Score();
+            scoreBoard.incScore2();
         }
     }
 }

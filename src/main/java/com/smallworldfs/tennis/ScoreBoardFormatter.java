@@ -10,7 +10,7 @@ public enum ScoreBoardFormatter {
     REGULAR_TIE((ScoreBoard scoreBoard) -> scoreBoard.getScore1() + "-All"),
     REGULAR((ScoreBoard scoreBoard) -> scoreBoard.getScore1() + "-" + scoreBoard.getScore2());
 
-    private Function<ScoreBoard, String> formatter;
+    private final Function<ScoreBoard, String> formatter;
 
     ScoreBoardFormatter(Function<ScoreBoard, String> formatter) {
         this.formatter = formatter;
