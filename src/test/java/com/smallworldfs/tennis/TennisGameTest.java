@@ -55,7 +55,7 @@ class TennisGameTest {
         addPoints(game, player1Score, "player1");
         addPoints(game, player2Score, "player2");
 
-        assertThat(game.getScore()).isEqualTo(expectedScore);
+        assertThat(game.getScoreNew()).isEqualTo(expectedScore);
     }
 
     private void addPoints(TennisGame game, int points, String playerName) {

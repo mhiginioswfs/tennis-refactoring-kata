@@ -1,8 +1,6 @@
 package com.smallworldfs.tennis;
 
-public class TennisGame
-
-{
+public class TennisGame {
 
     public int P1point = 0;
     public int P2point = 0;
@@ -12,11 +10,16 @@ public class TennisGame
     private String player1Name;
     private String player2Name;
 
+    private final GameSituation gameSituation;
+
     public TennisGame(String player1Name, String player2Name) {
         this.player1Name = player1Name;
         this.player2Name = player2Name;
+
+        gameSituation = new GameSituation(new Player("player1", 1), new Player("player2", 2));
     }
 
+    @Deprecated
     public String getScore() {
         String score = "";
         if (P1point == P2point && P1point < 4) {
@@ -91,7 +94,12 @@ public class TennisGame
         if (P2point >= 4 && P1point >= 0 && (P2point - P1point) >= 2) {
             score = "Win for player2";
         }
+
         return score;
+    }
+
+    public String getScoreNew() {
+        return gameSituation.getScore();
     }
 
     public void SetP1Score(int number) {
@@ -108,16 +116,20 @@ public class TennisGame
 
     public void P1Score() {
         P1point++;
+        gameSituation.getPlayer1().addPoint();
     }
 
     public void P2Score() {
         P2point++;
+        gameSituation.getPlayer2().addPoint();
     }
 
     public void wonPoint(String player) {
-        if (player == "player1")
+        if ("player1".equals(player)) {
             P1Score();
-        else
+        }
+        else {
             P2Score();
+        }
     }
 }
